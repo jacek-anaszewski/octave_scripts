@@ -24,14 +24,14 @@ endfor;
 
 filt=zeros(1,N);
 for (k=201:N)
-   filt(201-(k-201)) = sig2(x(k));
+   filt(k) = sig2(x(k));
 endfor;
 
 y=zeros(1,N);
 for (n=201:N)
-   for (k=201:N) 
-      y(n) = y(n) + (base(k) * filt(201+n-k));
+   for (k=201:N)
       printf("n: %.2f, k: %.2f, diff: %.2f, y(n): %.2f\n", n, k, 201+n-k, y(n));
+      y(n) = y(n) + (base(k) * filt(201+n-k));
    endfor;
    y(n) = y(n) / (N - 201);
 endfor;
