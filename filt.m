@@ -26,17 +26,16 @@ endfor;
 filt=zeros(1,N);
 for (k=201:N)
 #   filt(k) = sig2(x(k));
-#   filt(201-(k-201)) = sig2(x(k));
-   filt(402-k) = sig2(x(k));
+   filt(201-(k-201)) = sig2(x(k));
    printf("filt(%d): %.2f\n", k, filt(k));
 endfor;
 
 y=zeros(1,N);
 for (n=201:N)
    printf("----n=%d-----\n", n);
-   for (k=201:N)
+   for (k=n:N)
       y(n) = y(n) + (base(k) * filt(201+n-k));
-#      printf("base(%d): %.2f, filt(%d): %.2f, y(%d): %.2f\n", k, base(k), 201+n-k, filt(201+n-k), n, y(n));
+      printf("base(%d): %.2f, filt(%d): %.2f, y(%d): %.2f\n", k, base(k), 201+n-k, filt(201+n-k), n, y(n));
    endfor;
 #   y(n) = y(n) / (N - 201);
 endfor;
