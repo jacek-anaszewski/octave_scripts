@@ -33,9 +33,10 @@ endfor;
 
 filt=zeros(1,N);
 for (k=201:N)
-   filt(201-(k-201)) = sig2(x(k));
+   rev_id = 201-(k-201);
+   filt(rev_id) = sig2(x(k));
 #   filt(201-(k-201)) = sig3(x(k));
-   printf("filt(%d): %.2f\n", k, filt(k));
+   printf("filt(%d): %.2f\n", rev_id, filt(rev_id));
 endfor;
 
 y=zeros(1,N);
