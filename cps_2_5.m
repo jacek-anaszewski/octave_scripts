@@ -1,4 +1,4 @@
-N=64;
+N=16;
 n=0:1:N-1;
 NN=2*N;
 
@@ -66,41 +66,19 @@ subplot(5, 1, 4);
 plot(n,bHR);
 
 
-#x=(-2:0.01:2);
-#N=length(x);
-#
-#base=zeros(1,N);
-#for (k=201:N)
-#   base(k) = sig1(x(k));
-#   printf("base(%d): %.2f\n", k, base(k));
-#endfor;
-#
-#filt=zeros(1,N);
-#for (k=201:N)
-#   rev_id = 201-(k-201);
-#   filt(rev_id) = sig2(x(k));
-##   filt(201-(k-201)) = sig3(x(k));
-#   printf("filt(%d): %.2f\n", rev_id, filt(rev_id));
-#endfor;
-#
-#y=zeros(1,N);
-#for (n=201:N)
-##   printf("----n=%d-----\n", n);
-#   for (k=n:N)
-#      y(n) = y(n) + (base(k) * filt(201+n-k));
-##      printf("base(%d): %.2f, filt(%d): %.2f, y(%d): %.2f\n", k, base(k), 201+n-k, filt(201+n-k), n, y(n));
-#   endfor;
-##   y(n) = y(n) / (N - 201);
-#endfor;
-#
-#z = conv(base, filt, "same");
-#
-#subplot(4, 1, 1);
-#plot(x,base);
-#subplot(4, 1, 2)
-#plot(x,filt);
-#subplot(4, 1, 3);
-#plot(x,y);
-#subplot(4, 1, 4);
-#plot(x,z);
+for (k=1:N)
+   Tf(k,1:N)=bf(k,1:N);
+   Tc(k,1:N)=bc(k,1:N);
+   Ts(k,1:N)=bs(k,1:N);
+   THD(k,1:N)=bHD(k,1:N);
+   THR(k,1:N)=bHR(k,1:N);
+endfor;
 
+T=THD;
+I=T * T';
+for (i=1:N)
+   for (j=1:N)
+      printf("%.2f ", I(i, j));
+   endfor
+   printf("\n");
+endfor
