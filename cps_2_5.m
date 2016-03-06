@@ -1,4 +1,4 @@
-N=16;
+N=64;
 n=0:1:N-1;
 NN=2*N;
 
@@ -10,6 +10,8 @@ for (k=0:N-1)
    bc(k+1, n+1) = c(k+1) * cos(pi*k*(2*n+1)/NN);
    bs(k+1, n+1) = s * sin(pi*(k+1)*(n+1)/(N+1));
 endfor;
+
+figure(1);
 
 subplot(5, 1, 1);
 plot(n,bf);
@@ -74,11 +76,55 @@ for (k=1:N)
    THR(k,1:N)=bHR(k,1:N);
 endfor;
 
-T=THD;
-I=T * T';
-for (i=1:N)
-   for (j=1:N)
-      printf("%.2f ", I(i, j));
-   endfor
-   printf("\n");
+#T=THR;
+#I=T * T';
+#for (i=1:N)
+#   for (j=1:N)
+#      printf("%.2f ", I(i, j));
+#   endfor
+#   printf("\n");
+#endfor
+
+#for (i=1:N)
+#   printf("%.2f ", T(3, i) * T(4, i));
+#endfor
+
+kk=5;
+fi=0;
+n=0:N-1;
+x1=cos((2*pi/N)*kk*n + fi);
+x2=cos(pi*kk*(2*n+1)/NN + fi);
+x3=sin(pi*(kk+1)*(n+1)/(N+1) + fi);
+x4=cos((2*pi/N)*2*n + fi) + cos((2*pi/N)*4*n + fi);
+x5=[ones(1,N/2) zeros(1,N/2)];
+x6=[-ones(1,N/4) ones(1,N/2) -ones(1,N/4)]
+
+x=x4;
+T=Tf;
+a=T*x';
+y=T' * a;
+y=y';
+
+figure(2);
+
+subplot(5, 1, 1);
+plot(n,x);
+subplot(5, 1, 2);
+plot(n,real(a));
+subplot(5, 1, 3);
+plot(n,y);
+subplot(5, 1, 4);
+plot(n,y-x);
+
+y=zeros(1,N);
+for (k=0:N-1)
+   a(k+1)=sum(x .* conj(T(k+1,1:N)));
 endfor
+for (k=0:N-1)
+   y=y+a(k+1) * T(k+1,1:N);
+endfor
+
+figure(3)
+
+subplot(5, 1, 5);
+plot(n,y-x);
