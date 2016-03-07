@@ -99,8 +99,8 @@ x4=cos((2*pi/N)*2*n + fi) + cos((2*pi/N)*4*n + fi);
 x5=[ones(1,N/2) zeros(1,N/2)];
 x6=[-ones(1,N/4) ones(1,N/2) -ones(1,N/4)]
 
-x=x4;
-T=Tf;
+x=x5;
+T=THR;
 a=T*x';
 y=T' * a;
 y=y';
