@@ -4,7 +4,7 @@ dt=T/N;		#odległość między próbkami
 t=0:dt:(N-1)*dt;#kolejne chwile czasowe odpowiadające próbkom sygnału
 A=1;		#amplituda sygnału [-A, +A]
 NF=300;		#liczba współczynników szeregu Fouriera do wyznaczenia (mniejsza lub równa N/2)
-isygnal=4;	#numer sygnału testowego
+isygnal=1;	#numer sygnału testowego
 
 f0=1/T;		#częstotliwość podstawowa szeregu Fouriera
 
